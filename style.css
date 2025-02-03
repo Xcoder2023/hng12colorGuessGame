@@ -27,6 +27,28 @@ h1 {
   color: #333;
   font-size: 22px;
 }
+.game-description{
+  display: flex;
+  color: #007bff;
+  text-align: start;
+  font-size: small;
+  font-weight: 900;
+}
+
+.color-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  color: #f4f4f4;
+  height: 120px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.color-box-paragraph{
+  mix-blend-mode: difference;
+}
 
 /* .color-box {
   width: 120px;
@@ -34,18 +56,10 @@ h1 {
   margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-} */
-
-.color-box {
-  width: 120px;
-  height: 120px;
-  margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  opacity: 0; /* Hide initially */
+  opacity: 0; 
   visibility: hidden;
   transition: opacity 0.5s ease-in-out;
-}
+} */
 
 
 .color-options {
@@ -58,7 +72,7 @@ h1 {
 }
 
 .color-btn {
-  width: 80px;
+  width: 150px;
   height: 80px;
   border: none;
   cursor: pointer;

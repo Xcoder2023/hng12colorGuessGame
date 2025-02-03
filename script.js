@@ -8,8 +8,18 @@ const failedCounterDisplay = document.getElementById("failedCounter");
 const newGameButton = document.getElementById("newGameButton");
 
 let targetColor = "";
-let score = 0;
-let failedAttempts = 0;
+
+
+let score = localStorage.getItem("score")
+  ? parseInt(localStorage.getItem("score"))
+  : 0;
+let failedAttempts = localStorage.getItem("failedAttempts")
+  ? parseInt(localStorage.getItem("failedAttempts"))
+  : 0;
+
+
+scoreDisplay.textContent = `Score: ${score}`;
+failedCounterDisplay.textContent = `Failed: ${failedAttempts}`;
 
 
 function shuffleArray(array) {
@@ -20,15 +30,14 @@ function shuffleArray(array) {
 function startNewGame() {
   let shuffledColors = shuffleArray([...COLORS]);
 
- 
+  
   const correctIndex = Math.floor(Math.random() * shuffledColors.length);
   targetColor = shuffledColors[correctIndex];
 
   
-  colorBox.style.opacity = "0";
-  colorBox.style.visibility = "hidden";
+  colorBox.style.backgroundColor = targetColor;
 
-  gameStatus.textContent = "Guess the correct color!";
+  gameStatus.textContent = "Guess the correct color from the options Above!";
   gameStatus.style.color = "#333";
 
   
@@ -39,7 +48,7 @@ function startNewGame() {
     button.style.backgroundColor = color;
     button.setAttribute("data-testid", "colorOption");
 
-    
+
     button.addEventListener("click", () => checkGuess(color));
     colorOptionsContainer.appendChild(button);
   });
@@ -47,11 +56,6 @@ function startNewGame() {
 
 
 function checkGuess(selectedColor) {
-  
-  colorBox.style.backgroundColor = targetColor;
-  colorBox.style.opacity = "1";
-  colorBox.style.visibility = "visible";
-
   if (selectedColor === targetColor) {
     score++;
     gameStatus.textContent = "Correct! 🎉";
@@ -67,13 +71,19 @@ function checkGuess(selectedColor) {
   failedCounterDisplay.textContent = `Failed: ${failedAttempts}`;
 
   
-  setTimeout(startNewGame, 1500);
+  localStorage.setItem("score", score);
+  localStorage.setItem("failedAttempts", failedAttempts);
+
+  
+  setTimeout(startNewGame, 1000);
 }
 
 
 newGameButton.addEventListener("click", () => {
   score = 0;
   failedAttempts = 0;
+  localStorage.setItem("score", score);
+  localStorage.setItem("failedAttempts", failedAttempts);
   scoreDisplay.textContent = `Score: ${score}`;
   failedCounterDisplay.textContent = `Failed: ${failedAttempts}`;
   startNewGame();

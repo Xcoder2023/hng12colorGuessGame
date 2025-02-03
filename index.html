@@ -9,10 +9,14 @@
 <body>
     <div class="game-container">
         <h1>Color Guessing Game</h1>
+        <p class="game-description">  Welcome to the Color Guessing Game! Your goal is to guess the color that matches the target box. 
+          To make a guess, simply click on one of the color buttons below. If you guess correctly, you’ll earn a point! 
+          If you guess wrong, don’t worry, just try again! 
+          Good luck, and have fun!</p>
         <p data-testid="gameInstructions" id="gameInstructions">Guess the correct color!</p>
 
         <!-- Correct Color Box -->
-        <div class="color-box" data-testid="colorBox" id="colorBox"></div>
+        <div class="color-box" data-testid="colorBox" id="colorBox"><p class="color-box-paragraph">guess this color</p></div>
 
         <!-- Color Options -->
         <div>
@@ -27,7 +31,7 @@
         <p data-testid="failedCounter" id="failedCounter">Failed: 0</p>
 
         <!-- New Game Button -->
-        <button data-testid="newGameButton" id="newGameButton">New Game</button>
+        <button data-testid="newGameButton" id="newGameButton">Reset</button>
     </div>
 
     <script src="script.js"></script>
