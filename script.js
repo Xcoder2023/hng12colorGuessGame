@@ -11,23 +11,27 @@ let targetColor = "";
 let score = 0;
 let failedAttempts = 0;
 
-// Function to shuffle an array
+
 function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
-// Function to start a new game
+
 function startNewGame() {
   let shuffledColors = shuffleArray([...COLORS]);
 
+ 
   const correctIndex = Math.floor(Math.random() * shuffledColors.length);
   targetColor = shuffledColors[correctIndex];
 
-  colorBox.style.backgroundColor = targetColor;
+  
+  colorBox.style.opacity = "0";
+  colorBox.style.visibility = "hidden";
 
-  gameStatus.textContent = "Select the correct color option!";
+  gameStatus.textContent = "Guess the correct color!";
   gameStatus.style.color = "#333";
 
+  
   colorOptionsContainer.innerHTML = "";
   shuffledColors.forEach((color) => {
     const button = document.createElement("button");
@@ -35,13 +39,19 @@ function startNewGame() {
     button.style.backgroundColor = color;
     button.setAttribute("data-testid", "colorOption");
 
+    
     button.addEventListener("click", () => checkGuess(color));
     colorOptionsContainer.appendChild(button);
   });
 }
 
-// Function to check the user's guess
+
 function checkGuess(selectedColor) {
+  
+  colorBox.style.backgroundColor = targetColor;
+  colorBox.style.opacity = "1";
+  colorBox.style.visibility = "visible";
+
   if (selectedColor === targetColor) {
     score++;
     gameStatus.textContent = "Correct! 🎉";
@@ -52,15 +62,15 @@ function checkGuess(selectedColor) {
     gameStatus.style.color = "red";
   }
 
-  // Update counters
+  
   scoreDisplay.textContent = `Score: ${score}`;
   failedCounterDisplay.textContent = `Failed: ${failedAttempts}`;
 
-  // Wait 1 second before starting a new round so player sees result
+  
   setTimeout(startNewGame, 1500);
 }
 
-// New Game Button Event Listener
+
 newGameButton.addEventListener("click", () => {
   score = 0;
   failedAttempts = 0;
@@ -69,5 +79,5 @@ newGameButton.addEventListener("click", () => {
   startNewGame();
 });
 
-// Start the game on page load
+
 startNewGame();
